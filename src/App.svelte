@@ -1,4 +1,7 @@
 <script>
+	import Hello from './hello.svelte';	//자식
+
+	let asdf = "hellooo";
 	export let name;
 </script>
 
@@ -6,6 +9,9 @@
 	<h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
+
+<Hello hola={asdf}/>
+
 
 <style>
 	main {
