@@ -1,12 +1,7 @@
 <script>
-// props 가져오기. export가 그 export 가 아님
-export let hola;
-export let fdsa;
-if(fdsa) {
-    hola = "AAAAAAAAAA";
-}
+import {myStore} from './store.js'
 </script>
 
 <div>
-    MAIN, {hola} {fdsa}
+    use store : {$myStore}
 </div>
