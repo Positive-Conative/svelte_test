@@ -2,6 +2,7 @@
 	import Hello from './hello.svelte';	//자식
 
 	let asdf = "hellooo";
+	let fdsa = false;
 	export let name;
 </script>
 
@@ -10,7 +11,8 @@
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
 
-<Hello hola={asdf}/>
+<!-- props -->
+<Hello hola={asdf}, {fdsa}/> 
 
 
 <style>
