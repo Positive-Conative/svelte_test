@@ -1,43 +1,40 @@
 <script>
-	import Hello from './hello.svelte';	//자식
+	import {writable} from 'svelte/store';
+	import List from './MakeList.svelte';
 
-	import {myStore} from './store.js';
-	console.log(myStore);
-	console.log($myStore);	//데이터 자동 구독  asdf
-	let asdf = "hellooo";
+	let title = '';
+	let myLists = writable([]);
+	let bid = 0;
 
-	$myStore = asdf;
-	// export let name;
+	function createList() {
+		if (!title.trim()) {
+			title = ''
+			return
+		}
+		$myLists.push({
+			bid,
+			title
+		});
+		$myLists = $myLists;	// 자기 자신 할당
+		title = '';
+		bid++;
+	}
 </script>
 
-<main>
-	a
-	<!-- <h1>Hello {name}!</h1> -->
-	<!-- <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p> -->
-</main>
-
-<!-- props -->
-<Hello /> 
+<!-- for -->
+{#each $myLists as info}
+	<!-- stroe 통째로 넘겨야 하기 때문에 $로 넘기면 안 됨 -->
+	<List {myLists} {info}/>
+{/each}
 
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+<!-- title로 연결 -->
+<input bind:value={title} type="text" 
+	on:keydown={
+		(e)=>{e.key === 'Enter' && createList()
 	}
+}/>
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
+<button on:click={createList}>
+	Create list
+</button>
